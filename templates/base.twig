@@ -1,0 +1,50 @@
+{% block html_head_container %}
+
+{% include 'html-header.twig' %}
+	{% block head %}
+	{% endblock %}
+	</head>
+{% endblock %}
+
+	<body class="{{body_class}}" data-template="base.twig">
+		<header class="c-header" >
+			{% block header %}
+				<div class="o-wrapper">
+					<h1 class="hdr-logo">
+						<a class="hdr-logo-link" href="{{site.url}}" rel="home">{{site.name}}</a>
+					</h1>
+					<nav id="nav-main" class="c-nav-primary">
+						{% include "menu.twig" with {'menu': menu.get_items} %}
+					</nav><!-- #nav -->
+				</div>
+			{% endblock %}
+		</header>
+
+		<section id="content" class="o-wrapper">
+			{% if title %}<h1 class="c-heading-a">{{title}}</h1>{% endif %}
+			{% if sidebar %}
+				<div class="o-8-12@large u-left@large">
+			{% endif %}
+					{% block content %}
+						Sorry, no content
+					{% endblock %}
+			{% if sidebar %}
+				</div>
+			{% endif %}
+			{% if sidebar %}
+				<aside class="o-4-12@large u-right@large u-last@large">
+					{{sidebar}}
+				</aside>
+			{% endif %}
+		</section>
+
+		{% block footer %}
+			<footer class="c-footer">
+				<div class="o-wrapper">
+				{% include 'footer.twig' %}
+				</div>
+			</footer>
+			{{ function('wp_footer') }}
+		{% endblock %}
+	</body>
+</html>

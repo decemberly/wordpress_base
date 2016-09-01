@@ -1,0 +1,28 @@
+{% extends "base.twig" %}
+
+{% block content %}
+	<article class="o-8-12@large u-center@large">
+		<section class="o-row -large">
+			<h1 class="c-heading-a">{{post.title}}</h1>
+			<p class="c-author">
+				By<a href="{{post.author.path}}"> {{ post.author.name }} </a>| {{ post.post_date|date}}
+			</p>
+			<div class="c-body">
+				{{post.content}}
+			</div>
+		</section>
+	{% if post.comment_status != 'closed' %}
+		<section class="o-row -large c-comments">
+			<div class="o-row -small c-respond">
+				<h2 class="c-heading-b">Comments</h2>
+				{{ fn('comment_form') }}
+			</div>
+			<div class="o-row -small c-responses">
+				{% for cmt in post.get_comments() %}
+					{% include "comment.twig" with {comment:cmt} %}
+				{% endfor %}
+			</div>
+		</section>
+	{% endif %}
+	</article>
+{% endblock %}
